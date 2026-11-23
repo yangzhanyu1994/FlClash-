@@ -29,6 +29,7 @@ class WidgetSync {
     _ref.listen(patchClashConfigProvider, (_, _) => _push());
     _ref.listen(groupsProvider, (_, _) => _push());
     _ref.listen(delayDataSourceProvider, (_, _) => _push());
+    _ref.listen(totalTrafficProvider, (_, _) => _push());
   }
 
   final Ref _ref;
@@ -79,6 +80,7 @@ class WidgetSync {
     final nodeName = _nodeName(probe, ipInfo);
     final running = isStart;
     final coreRunning = coreStatus == CoreStatus.connected;
+    final totalTraffic = _ref.read(totalTrafficProvider);
     _connections = await _connectionCount();
     return {
       'running': running,
@@ -90,6 +92,10 @@ class WidgetSync {
       'nodeName': nodeName,
       'country': ipInfo?.countryCode ?? '',
       'countryCode': ipInfo?.countryCode ?? '',
+      'ipAddress': ipInfo?.ip ?? '',
+      'organization': quality?.organization ?? '',
+      'runtimeLabel': _runtimeLabel(_ref.read(runTimeProvider)),
+      'todayTrafficLabel': _totalLabel(totalTraffic),
       'lineType': quality == null ? '' : _lineType(quality.type),
       'ipQualityLabel': quality == null ? '' : _qualityLabel(quality.level),
       'latencyMs': _latency(nodeName),
@@ -145,6 +151,31 @@ class WidgetSync {
   String _speedLabel(num bytes) {
     final show = bytes.traffic;
     return '${show.value} ${show.unit}/s';
+  }
+
+  String _runtimeLabel(int? elapsedMs) {
+    if (elapsedMs == null) {
+      return '';
+    }
+    final seconds = elapsedMs ~/ 1000;
+    final hours = seconds ~/ 3600;
+    if (hours > 999) {
+      return '999:59:59';
+    }
+    final minutes = seconds ~/ 60 % 60;
+    final secs = seconds % 60;
+    return '${hours.toString().padLeft(2, '0')}:'
+        '${minutes.toString().padLeft(2, '0')}:'
+        '${secs.toString().padLeft(2, '0')}';
+  }
+
+  String _totalLabel(Traffic total) {
+    final bytes = total.up + total.down;
+    if (bytes <= 0) {
+      return '';
+    }
+    final show = bytes.traffic;
+    return '${show.value} ${show.unit}';
   }
 
   String _lineType(IpType type) {

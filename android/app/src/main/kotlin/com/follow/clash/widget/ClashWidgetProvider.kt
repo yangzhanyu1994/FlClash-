@@ -17,13 +17,15 @@ import com.follow.clash.common.intent
 import com.follow.clash.common.quickIntent
 import com.follow.clash.common.toPendingIntent
 
-class ClashWidgetProvider : AppWidgetProvider() {
+open class ClashWidgetProvider : AppWidgetProvider() {
+    protected open val layoutRes: Int = R.layout.widget_4x2
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        appWidgetIds.forEach { updateWidget(context, appWidgetManager, it) }
+        appWidgetIds.forEach { updateWidget(context, appWidgetManager, it, layoutRes) }
         scheduleTick(context)
     }
 
@@ -51,23 +53,41 @@ class ClashWidgetProvider : AppWidgetProvider() {
         const val ACTION_REFRESH = "com.follow.clash.widget.ACTION_REFRESH"
         private const val TICK_MS = 3000L
 
+        private val ALL_PROVIDER_CLASSES = listOf(
+            ClashWidgetProvider::class.java,
+            ClashWidget2x2Provider::class.java,
+            ClashWidget4x1Provider::class.java,
+            ClashWidgetTrafficProvider::class.java,
+            ClashWidgetStatusProvider::class.java,
+        )
+
         fun refreshAll(context: Context) {
             val manager = AppWidgetManager.getInstance(context)
-            val ids = manager.getAppWidgetIds(
-                ComponentName(context, ClashWidgetProvider::class.java),
-            )
-            ids.forEach { updateWidget(context, manager, it) }
+            ALL_PROVIDER_CLASSES.forEach { clazz ->
+                val ids = manager.getAppWidgetIds(ComponentName(context, clazz))
+                ids.forEach { updateWidget(context, manager, it, layoutFor(clazz)) }
+            }
         }
+
+        private fun layoutFor(clazz: Class<*>): Int =
+            when (clazz) {
+                ClashWidget2x2Provider::class.java -> R.layout.widget_2x2
+                ClashWidget4x1Provider::class.java -> R.layout.widget_4x1
+                ClashWidgetTrafficProvider::class.java -> R.layout.widget_4x2_traffic
+                ClashWidgetStatusProvider::class.java -> R.layout.widget_4x2_status
+                else -> R.layout.widget_4x2
+            }
 
         private fun updateWidget(
             context: Context,
             manager: AppWidgetManager,
             appWidgetId: Int,
+            layoutRes: Int,
         ) {
             val snapshot = WidgetSnapshot.load(context)
             manager.updateAppWidget(
                 appWidgetId,
-                buildViews(context, snapshot, WidgetSnapshot.flashOn(snapshot.abnormal)),
+                buildViews(context, snapshot, WidgetSnapshot.flashOn(snapshot.abnormal), layoutRes),
             )
         }
 
@@ -75,10 +95,10 @@ class ClashWidgetProvider : AppWidgetProvider() {
             context: Context,
             snapshot: WidgetSnapshot,
             flashOn: Boolean,
+            layoutRes: Int,
         ): RemoteViews {
-            val views = RemoteViews(context.packageName, R.layout.widget_4x2)
+            val views = RemoteViews(context.packageName, layoutRes)
             val accent = ContextCompat.getColor(context, R.color.widget_accent)
-            val primary = ContextCompat.getColor(context, R.color.widget_text_primary)
             val secondary = ContextCompat.getColor(context, R.color.widget_text_secondary)
             val alert = ContextCompat.getColor(context, R.color.widget_alert_text)
             val statusColor = when {
@@ -86,6 +106,237 @@ class ClashWidgetProvider : AppWidgetProvider() {
                 snapshot.running -> accent
                 else -> secondary
             }
+            when (layoutRes) {
+                R.layout.widget_2x2 -> bind2x2(views, context, snapshot, statusColor)
+                R.layout.widget_4x1 -> bind4x1(views, context, snapshot, statusColor)
+                R.layout.widget_4x2_traffic -> bindTraffic(views, context, snapshot, statusColor)
+                R.layout.widget_4x2_status -> bindStatus(views, context, snapshot, flashOn)
+                else -> bind4x2(views, context, snapshot, flashOn, statusColor)
+            }
+            return views
+        }
+
+        private fun bind2x2(
+            views: RemoteViews,
+            context: Context,
+            snapshot: WidgetSnapshot,
+            statusColor: Int,
+        ) {
+            views.setInt(R.id.widget_shield, "setColorFilter", statusColor)
+            views.setTextViewText(
+                R.id.widget_connected_label,
+                context.getString(
+                    if (snapshot.vpnConnected) {
+                        R.string.widget_connected_dot
+                    } else {
+                        R.string.widget_disconnected_dot
+                    },
+                ),
+            )
+            views.setTextColor(R.id.widget_connected_label, statusColor)
+            views.setInt(
+                R.id.widget_power,
+                "setBackgroundResource",
+                if (snapshot.running) {
+                    R.drawable.widget_power_bg
+                } else {
+                    R.drawable.widget_power_bg_off
+                },
+            )
+            views.setTextViewText(
+                R.id.widget_node_name,
+                snapshot.nodeName.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_line_type,
+                context.getString(
+                    R.string.widget_ip_type_value,
+                    snapshot.lineType.ifEmpty { "--" },
+                ),
+            )
+            views.setTextViewText(
+                R.id.widget_ip_quality,
+                snapshot.ipQualityLabel.ifEmpty { "--" },
+            )
+            bindClicks(views, context)
+        }
+
+        private fun bind4x1(
+            views: RemoteViews,
+            context: Context,
+            snapshot: WidgetSnapshot,
+            statusColor: Int,
+        ) {
+            views.setInt(R.id.widget_shield, "setColorFilter", statusColor)
+            views.setTextViewText(
+                R.id.widget_connected_label,
+                context.getString(
+                    if (snapshot.vpnConnected) {
+                        R.string.widget_connected_dot
+                    } else {
+                        R.string.widget_disconnected_dot
+                    },
+                ),
+            )
+            views.setTextColor(R.id.widget_connected_label, statusColor)
+            views.setInt(
+                R.id.widget_power,
+                "setBackgroundResource",
+                if (snapshot.running) {
+                    R.drawable.widget_power_bg
+                } else {
+                    R.drawable.widget_power_bg_off
+                },
+            )
+            views.setTextViewText(
+                R.id.widget_node_name,
+                snapshot.nodeName.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_latency_value,
+                snapshot.latencyMs?.let { "$it ms" } ?: "--",
+            )
+            views.setTextViewText(
+                R.id.widget_tile_mode_value,
+                snapshot.mode.ifEmpty { "--" },
+            )
+            bindClicks(views, context)
+        }
+
+        private fun bindTraffic(
+            views: RemoteViews,
+            context: Context,
+            snapshot: WidgetSnapshot,
+            statusColor: Int,
+        ) {
+            views.setInt(R.id.widget_shield, "setColorFilter", statusColor)
+            views.setTextViewText(
+                R.id.widget_connected_label,
+                context.getString(
+                    if (snapshot.vpnConnected) {
+                        R.string.widget_connected_dot
+                    } else {
+                        R.string.widget_disconnected_dot
+                    },
+                ),
+            )
+            views.setTextColor(R.id.widget_connected_label, statusColor)
+            views.setInt(
+                R.id.widget_power,
+                "setBackgroundResource",
+                if (snapshot.running) {
+                    R.drawable.widget_power_bg
+                } else {
+                    R.drawable.widget_power_bg_off
+                },
+            )
+            views.setTextViewText(
+                R.id.widget_node_name,
+                snapshot.nodeName.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_tile_mode_value,
+                snapshot.mode.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_download_value,
+                snapshot.downloadLabel.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_upload_value,
+                snapshot.uploadLabel.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_today_traffic_value,
+                context.getString(
+                    R.string.widget_today_traffic,
+                    snapshot.todayTrafficLabel.ifEmpty { "--" },
+                ),
+            )
+            bindClicks(views, context)
+        }
+
+        private fun bindStatus(
+            views: RemoteViews,
+            context: Context,
+            snapshot: WidgetSnapshot,
+            flashOn: Boolean,
+        ) {
+            val accent = ContextCompat.getColor(context, R.color.widget_accent)
+            val alert = ContextCompat.getColor(context, R.color.widget_alert_text)
+            val primary = ContextCompat.getColor(context, R.color.widget_text_primary)
+            views.setTextViewText(
+                R.id.widget_status_pill,
+                context.getString(
+                    if (snapshot.coreRunning) {
+                        R.string.widget_core_running
+                    } else {
+                        R.string.widget_core_stopped
+                    },
+                ),
+            )
+            views.setInt(
+                R.id.widget_status_pill,
+                "setBackgroundResource",
+                if (flashOn) {
+                    R.drawable.widget_card_alert_bg
+                } else {
+                    R.drawable.widget_pill_bg
+                },
+            )
+            views.setTextColor(
+                R.id.widget_status_pill,
+                if (flashOn) alert else accent,
+            )
+            views.setTextViewText(
+                R.id.widget_sg_badge,
+                snapshot.countryCode.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_ip_address,
+                snapshot.ipAddress.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_line_type,
+                snapshot.lineType.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_ip_quality,
+                if (snapshot.ipQualityLabel.isEmpty()) {
+                    "--"
+                } else {
+                    context.getString(
+                        R.string.widget_quality_pill,
+                        snapshot.ipQualityLabel,
+                    )
+                },
+            )
+            views.setTextViewText(
+                R.id.widget_runtime_value,
+                snapshot.runtimeLabel.ifEmpty { "--" },
+            )
+            views.setTextViewText(
+                R.id.widget_organization_value,
+                snapshot.organization.ifEmpty { "--" },
+            )
+            views.setTextColor(R.id.widget_ip_address, if (flashOn) alert else primary)
+            views.setOnClickPendingIntent(
+                R.id.widget_power,
+                QuickAction.TOGGLE.quickIntent.toPendingIntent,
+            )
+            val openApp = openAppPendingIntent(context)
+            views.setOnClickPendingIntent(R.id.widget_root, openApp)
+        }
+
+        private fun bind4x2(
+            views: RemoteViews,
+            context: Context,
+            snapshot: WidgetSnapshot,
+            flashOn: Boolean,
+            statusColor: Int,
+        ) {
+            val secondary = ContextCompat.getColor(context, R.color.widget_text_secondary)
+            val alert = ContextCompat.getColor(context, R.color.widget_alert_text)
             views.setTextViewText(
                 R.id.widget_updated_at,
                 context.getString(
@@ -210,7 +461,14 @@ class ClashWidgetProvider : AppWidgetProvider() {
             val openApp = openAppPendingIntent(context)
             views.setOnClickPendingIntent(R.id.widget_root, openApp)
             views.setOnClickPendingIntent(R.id.widget_node_row, openApp)
-            return views
+        }
+
+        private fun bindClicks(views: RemoteViews, context: Context) {
+            views.setOnClickPendingIntent(
+                R.id.widget_power,
+                QuickAction.TOGGLE.quickIntent.toPendingIntent,
+            )
+            views.setOnClickPendingIntent(R.id.widget_root, openAppPendingIntent(context))
         }
 
         private fun refreshPendingIntent(context: Context): PendingIntent =

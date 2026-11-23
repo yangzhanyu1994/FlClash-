@@ -11,4 +11,8 @@
     <color name="widget_alert_bg">#FEE4E2</color>
     <color name="widget_alert_text">#D92D20</color>
     <color name="widget_alert_border">#F04438</color>
+    <color name="widget_pause_blue">#3B82F6</color>
+    <color name="widget_decor">#E3E9F5</color>
+    <color name="widget_pill_bg">#DCFCE7</color>
+    <color name="widget_badge_bg">#E4E7EC</color>
 </resources>
