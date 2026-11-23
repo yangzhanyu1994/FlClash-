@@ -1,0 +1,112 @@
+name: fork-android-apk
+
+# Upstream build.yaml only publishes APKs from chen08209/FlClash on v* tags
+# and signs with KEYSTORE secrets this fork does not have, so this workflow
+# builds an installable arm64 APK for this branch instead. No secrets used:
+# the APK is signed with a throwaway debug keystore generated in the run.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/android-home-widget
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.50.0'
+  GO_VERSION: '1.27.1'
+  NDK_VERSION: r28c
+
+jobs:
+  apk:
+    name: Android arm64 APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: core/go.sum
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1
+        id: ndk
+        with:
+          ndk-version: ${{ env.NDK_VERSION }}
+          add-to-path: true
+          link-to-sdk: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Get Flutter dependencies
+        run: |
+          flutter --version
+          flutter pub get
+
+      - name: Fetch CA certificates
+        shell: bash
+        env:
+          CA_BUNDLE: cacert-2026-09-25.pem
+          CA_BUNDLE_SHA256: a41b5d356aea97a529fe27e0f7316d2f9cf1b90637d00505
+        run: |
+          bundle=core/Clash.Meta/component/ca/ca-certificates.crt
+          curl -fsSL --retry 3 -o "$bundle" "https://curl.se/ca/$CA_BUNDLE"
+          echo "$CA_BUNDLE_SHA256  $bundle" | sha256sum -c -
+
+      - name: Analyze
+        run: flutter analyze --no-fatal-infos
+
+      - name: Build arm64 APK
+        env:
+          ANDROID_NDK_HOME: ${{ steps.ndk.outputs.ndk-path }}
+        run: dart tool/package.dart android --arch arm64 -v
+
+      - name: Sign APK with a throwaway debug keystore
+        shell: bash
+        run: |
+          apk=$(ls dist/FlClash-*-android-arm64.apk)
+          apksigner=$(find "$ANDROID_HOME/build-tools" -name apksigner -type f | head -1)
+          if "$apksigner" verify "$apk" 2>/dev/null; then
+            echo "$apk is already signed"
+          else
+            keytool -genkeypair -keystore /tmp/fork-debug.keystore \
+              -storepass android -alias androiddebugkey -keypass android \
+              -keyalg RSA -keysize 2048 -validity 365 \
+              -dname "CN=FlClash Fork Debug, O=Dev, C=CN"
+            "$apksigner" sign --ks /tmp/fork-debug.keystore \
+              --ks-pass pass:android --key-pass pass:android \
+              --out "$apk.signed" "$apk"
+            mv "$apk.signed" "$apk"
+            "$apksigner" verify "$apk"
+          fi
+          (cd dist && sha256sum FlClash-*-android-arm64.apk > SHA256SUMS)
+          cat dist/SHA256SUMS
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: flclash-widget-4x2-arm64-apk
+          path: |
+            dist/FlClash-*-android-arm64.apk
+            dist/SHA256SUMS
+          if-no-files-found: error
