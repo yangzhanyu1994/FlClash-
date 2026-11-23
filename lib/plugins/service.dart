@@ -161,6 +161,10 @@ class Service {
     return DateTime.fromMillisecondsSinceEpoch(ms);
   }
 
+  Future<bool> refreshWidget() async {
+    return await methodChannel.invokeMethod<bool>('refreshWidget') ?? false;
+  }
+
   bool get hasListeners {
     return _listeners.isNotEmpty;
   }
