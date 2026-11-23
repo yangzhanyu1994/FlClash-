@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_background">#0D1126</color>
+    <color name="widget_card">#171D33</color>
+    <color name="widget_border">#232A45</color>
+    <color name="widget_text_primary">#F5F7FA</color>
+    <color name="widget_text_secondary">#98A2B3</color>
+    <color name="widget_accent">#34E39A</color>
+    <color name="widget_power">#22C55E</color>
+    <color name="widget_power_off">#475467</color>
+    <color name="widget_alert_bg">#3A1520</color>
+    <color name="widget_alert_text">#FF6B5E</color>
+    <color name="widget_alert_border">#F04438</color>
+    <color name="widget_pause_blue">#3B82F6</color>
+    <color name="widget_decor">#1B2340</color>
+    <color name="widget_pill_bg">#173B2A</color>
+    <color name="widget_badge_bg">#3F4452</color>
+</resources>

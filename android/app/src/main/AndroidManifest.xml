@@ -122,6 +122,66 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".widget.ClashWidgetProvider"
+            android:exported="false"
+            android:label="@string/widget_4x2_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_4x2" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.ClashWidget2x2Provider"
+            android:exported="false"
+            android:label="@string/widget_2x2_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_2x2" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.ClashWidget4x1Provider"
+            android:exported="false"
+            android:label="@string/widget_4x1_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_4x1" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.ClashWidgetTrafficProvider"
+            android:exported="false"
+            android:label="@string/widget_4x2_traffic_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_4x2_traffic" />
+        </receiver>
+
+        <receiver
+            android:name=".widget.ClashWidgetStatusProvider"
+            android:exported="false"
+            android:label="@string/widget_4x2_status_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_4x2_status" />
+        </receiver>
+
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

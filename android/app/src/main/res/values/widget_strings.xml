@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_4x2_label">FiClash 运行监控</string>
+    <string name="widget_4x2_description">FiClash 运行状态、上下行速度、当前节点与延迟</string>
+    <string name="widget_monitor">运行监控 · 新加坡地区</string>
+    <string name="widget_last_updated">最后更新：%1$s</string>
+    <string name="widget_refresh">刷新</string>
+    <string name="widget_status_running">运行正常</string>
+    <string name="widget_status_stopped">未运行</string>
+    <string name="widget_vpn_connected">● VPN 已连接</string>
+    <string name="widget_vpn_disconnected">○ VPN 未连接</string>
+    <string name="widget_download">↓ 下载 %1$s</string>
+    <string name="widget_upload">↑ 上传 %1$s</string>
+    <string name="widget_current_node">当前节点</string>
+    <string name="widget_line_type">线路类型：%1$s</string>
+    <string name="widget_ip_quality">IP质量：%1$s</string>
+    <string name="widget_latency">延迟</string>
+    <string name="widget_vpn_status">VPN 状态</string>
+    <string name="widget_connections">实时连接</string>
+    <string name="widget_core">代理核心</string>
+    <string name="widget_requests">最近请求</string>
+    <string name="widget_mode">当前模式</string>
+    <string name="widget_connected">已连接</string>
+    <string name="widget_disconnected">未连接</string>
+    <string name="widget_connected_dot">● 已连接</string>
+    <string name="widget_disconnected_dot">○ 未连接</string>
+    <string name="widget_2x2_label">FIClash 节点速览</string>
+    <string name="widget_2x2_description">FIClash 当前节点、IP 类型与 IP 质量</string>
+    <string name="widget_4x1_label">FIClash 状态条</string>
+    <string name="widget_4x1_description">FIClash 当前节点、延迟与代理模式</string>
+    <string name="widget_4x2_traffic_label">FIClash 流量监控</string>
+    <string name="widget_4x2_traffic_description">FIClash 实时上下行速度与今日流量</string>
+    <string name="widget_4x2_status_label">FIClash 运行状态</string>
+    <string name="widget_4x2_status_description">FIClash 出口 IP、运行时长与组织信息</string>
+    <string name="widget_ip_type">IP 类型</string>
+    <string name="widget_ip_quality_title">IP 质量</string>
+    <string name="widget_ip_type_value">%1$s IP</string>
+    <string name="widget_quality_pill">质量%1$s</string>
+    <string name="widget_download_now">实时下载</string>
+    <string name="widget_upload_now">实时上传</string>
+    <string name="widget_today_traffic">今日流量 %1$s</string>
+    <string name="widget_status">状态</string>
+    <string name="widget_runtime">运行时长</string>
+    <string name="widget_organization">组织</string>
+    <string name="widget_core_running">运行中</string>
+    <string name="widget_core_stopped">已停止</string>
+</resources>
