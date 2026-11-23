@@ -8,6 +8,7 @@ import com.follow.clash.common.GlobalState
 import com.follow.clash.core.Core
 import com.follow.clash.models.SharedState
 import com.follow.clash.service.NetworkObserver
+import com.follow.clash.widget.ClashWidgetProvider
 import com.google.gson.Gson
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
@@ -60,6 +61,7 @@ class ServicePlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
             "init" -> initialize(result)
             "shutdown" -> shutdown(result)
             "getRunTime" -> getRunTime(result)
+            "refreshWidget" -> refreshWidget(result)
             "syncState" -> syncState(call, result)
             "start" -> start(call, result)
             "stop" -> stop(call, result)
@@ -103,6 +105,11 @@ class ServicePlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
         scope.launch {
             result.success(ServiceState.awaitRunTime())
         }
+    }
+
+    private fun refreshWidget(result: MethodChannel.Result) {
+        ClashWidgetProvider.refreshAll(GlobalState.application)
+        result.success(true)
     }
 
     private fun syncState(call: MethodCall, result: MethodChannel.Result) {
