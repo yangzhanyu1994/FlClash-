@@ -75,7 +75,7 @@ class WidgetSync {
     final ipInfo = probe.entryOf(routedOutbound).value;
     final quality = ipInfo == null
         ? null
-        : _ref.read(ipQualityProvider(ipInfo.ip)).valueOrNull;
+        : _ref.read(ipQualityProvider(ipInfo.ip)).value;
     final nodeName = _nodeName(probe, ipInfo);
     final running = isStart;
     final coreRunning = coreStatus == CoreStatus.connected;
