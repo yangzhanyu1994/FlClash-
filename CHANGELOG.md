@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.9.5 (2026-11-24)
+
+**Features**
+
+- **android** Android home-screen widgets show read-only proxy status, the current node, rates, IP quality, and this run's traffic (62bf830)
+- **update** When an update has no file to download, the app opens the release page to download it by hand (afe7136)
+
+**Bug Fixes**
+
+- **release** Release files drop "dev" from their names, and the website lists every download again (a8c4144)
+
 ## v0.9.4 (2026-11-19)
 
 **Features**

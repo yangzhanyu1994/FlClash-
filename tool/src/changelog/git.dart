@@ -107,6 +107,17 @@ class Git {
   bool tagExists(String name) =>
       _run(['tag', '--list', name]).trim().isNotEmpty;
 
+  /// A name git can walk, such as a tag that was actually fetched.
+  bool revisionExists(String name) {
+    final result = Process.runSync('git', [
+      'rev-parse',
+      '--verify',
+      '--quiet',
+      '$name^{commit}',
+    ], workingDirectory: workingDirectory);
+    return result.exitCode == 0 && (result.stdout as String).trim().isNotEmpty;
+  }
+
   /// Whether [name] is one of the tags [versionTags] would return.
   ///
   /// [tagExists] answers a different question — a tag on another branch exists

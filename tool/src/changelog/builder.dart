@@ -68,7 +68,7 @@ class ChangelogBuilder {
 
     if (pending != null && !git.tagExists(pending.tag)) {
       final commits = git.commits(
-        from: stable.isEmpty ? boundaryTag?.name : stable.first.name,
+        from: _existing(stable.isEmpty ? boundaryTag?.name : stable.first.name),
         to: 'HEAD',
       );
       commitIdsByTag[pending.tag] = _idsOf(commits);
@@ -85,9 +85,9 @@ class ChangelogBuilder {
 
     for (var index = 0; index < stable.length; index++) {
       final tag = stable[index];
-      final previous = index + 1 < stable.length
-          ? stable[index + 1].name
-          : boundaryTag?.name;
+      final previous = _existing(
+        index + 1 < stable.length ? stable[index + 1].name : boundaryTag?.name,
+      );
       final commits = git.commits(from: previous, to: tag.name);
       commitIdsByTag[tag.name] = _idsOf(commits);
       final existing = kept[tag.name];
@@ -105,12 +105,30 @@ class ChangelogBuilder {
       );
     }
 
+    final seen = versions.map((version) => version.tag).toSet();
+    for (final version in kept.values) {
+      if (!seen.add(version.tag)) {
+        continue;
+      }
+      versions.add(version);
+      commitIdsByTag[version.tag] = _referenced(version);
+    }
+
     return ChangelogBuildResult(
       changelog: Changelog(versions: versions),
       warnings: parser.warnings,
       commitIdsByTag: commitIdsByTag,
     );
   }
+
+  String? _existing(String? name) =>
+      name != null && git.revisionExists(name) ? name : null;
+
+  Set<String> _referenced(ChangelogVersion version) => {
+    for (final group in version.groups)
+      for (final entry in group.entries) ...[entry.id, ...entry.merges],
+    ...version.omit,
+  };
 
   Set<String> _idsOf(List<RawCommit> commits) =>
       commits.map((commit) => commit.shortHash).toSet();
