@@ -26,6 +26,14 @@ A multi-platform proxy client based on ClashMeta. Simple to use, open source and
 
 ## 必读
 
+### 2026-11-24 · 本 fork 的 Android 签名发布修复
+
+- 日期：2026-11-24（Asia/Singapore，UTC+8）
+- 更新者：Grok Build / cloud implementation
+- 内容：`v0.9.5` 的第三次打包在 `:app:packageRelease` 失败。密钥库能打开，但 PKCS12 的私钥只能用 store password 解密；CI 把另一份 key password 交给 Gradle，得到 `BadPaddingException`。fork 的签名步骤改为用 store password 解密同一张证书，不更换密钥。新签名不能覆盖上游 `chen08209/FlClash`。
+- 测试：签名检查在 attempt 3 已通过。修复后的标签会重新跑完整检查，不跳过。未真机验证。
+- 来源：attempt 3 日志 job `138256656546`；本机用同一密钥库核对 `getKey`（store password 成功，单独的 key password 失败）；Android Gradle `packageRelease`。
+
 ### 2026-11-24 · Android 桌面小组件（只读）
 
 - 日期：2026-11-24（Asia/Singapore，UTC+8）

@@ -702,7 +702,7 @@ jobs:
           {
             echo "keyAlias=${{ secrets.KEY_ALIAS }}"
             echo "storePassword=${{ secrets.STORE_PASSWORD }}"
-            echo "keyPassword=${{ secrets.KEY_PASSWORD }}"
+            echo "keyPassword=${{ secrets.STORE_PASSWORD }}"
           } >> android/local.properties
 
       - name: Setup Go
