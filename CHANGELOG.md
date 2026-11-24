@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.9.6 (2026-11-24)
+
+**Bug Fixes**
+
+- **android** Signed Android packages keep the same certificate and include the read-only home-screen widgets (e79eb3e)
+
 ## v0.9.5 (2026-11-24)
 
 **Features**

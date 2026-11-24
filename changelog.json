@@ -2,6 +2,24 @@
   "schemaVersion": 2,
   "versions": [
     {
+      "version": "0.9.6",
+      "tag": "v0.9.6",
+      "date": "2026-11-24",
+      "prerelease": false,
+      "groups": [
+        {
+          "type": "fix",
+          "entries": [
+            {
+              "id": "e79eb3e",
+              "scope": "android",
+              "text": "Signed Android packages keep the same certificate and include the read-only home-screen widgets"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "version": "0.9.5",
       "tag": "v0.9.5",
       "date": "2026-11-24",
