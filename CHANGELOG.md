@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.9.7 (2026-11-24)
+
+**Bug Fixes**
+
+- **ci** The GitHub release step can see the local plugins it needs (2d819a8)
+
 ## v0.9.6 (2026-11-24)
 
 **Bug Fixes**

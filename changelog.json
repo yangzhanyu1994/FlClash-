@@ -2,6 +2,24 @@
   "schemaVersion": 2,
   "versions": [
     {
+      "version": "0.9.7",
+      "tag": "v0.9.7",
+      "date": "2026-11-24",
+      "prerelease": false,
+      "groups": [
+        {
+          "type": "fix",
+          "entries": [
+            {
+              "id": "2d819a8",
+              "scope": "ci",
+              "text": "The GitHub release step can see the local plugins it needs"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "version": "0.9.6",
       "tag": "v0.9.6",
       "date": "2026-11-24",
