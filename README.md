@@ -34,8 +34,8 @@ A multi-platform proxy client based on ClashMeta. Simple to use, open source and
 - **Material You design with Apple-style interaction**: dynamic color, light and dark themes, continuous corners,
   sheets that snap between heights, and layouts that adapt from phones to desktops.
 - **Backup and restore** through WebDAV or a local file.
-- **Platform touches**: a Quick Settings tile, per-app proxy and Android TV support on Android; a tray menu and
-  global hotkeys on the desktop.
+- **Platform touches**: a Quick Settings tile, a home-screen widget, per-app proxy and Android TV support on
+  Android; a tray menu and global hotkeys on the desktop.
 - **Open source and ad-free**, licensed under GPL-3.0.
 
 ## Download
@@ -95,6 +95,14 @@ From a computer, the same works over adb:
 ```bash
 adb shell am start -a com.follow.clash.action.TOGGLE
 ```
+
+**Home-screen widget.** Long-press the Android home screen, open Widgets, and add FlClash. It shows whether the
+proxy service is running and can start or stop it. The title opens the app. Words follow the language chosen in
+the app, or the system language when none is set, and the colors follow the app's light or dark setting. The
+widget does not show a profile or subscription name. It says Connected only while the proxy service is actually
+running. If VPN permission has not been granted, or there is no profile, the button does not connect; open the
+app to grant permission or add a profile. After the process is killed, the home screen keeps the last text until
+FlClash runs again.
 
 ## Build from source
 

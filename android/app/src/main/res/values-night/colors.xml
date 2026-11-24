@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_card">@color/widget_card_dark</color>
+    <color name="widget_stroke">@color/widget_stroke_dark</color>
+    <color name="widget_title">@color/widget_title_dark</color>
+    <color name="widget_status">@color/widget_status_dark</color>
+</resources>

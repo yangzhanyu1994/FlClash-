@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="shortcut_background">#6666FB</color>
+    <color name="widget_card_light">#F7F9FB</color>
+    <color name="widget_card_dark">#1C1C1E</color>
+    <color name="widget_card">@color/widget_card_light</color>
+    <color name="widget_stroke_light">#E2E4EC</color>
+    <color name="widget_stroke_dark">#34343A</color>
+    <color name="widget_stroke">@color/widget_stroke_light</color>
+    <color name="widget_title_light">#1B1C1E</color>
+    <color name="widget_title_dark">#F5F5F7</color>
+    <color name="widget_title">@color/widget_title_light</color>
+    <color name="widget_status_light">#5C5F66</color>
+    <color name="widget_status_dark">#A1A1A6</color>
+    <color name="widget_status">@color/widget_status_light</color>
+    <color name="widget_status_pending_light">#5B5EE1</color>
+    <color name="widget_status_pending_dark">#B4B5FF</color>
+    <color name="widget_status_active_light">#1C76E0</color>
+    <color name="widget_status_active_dark">#8EB4FF</color>
+    <color name="widget_action_text">#FFFFFF</color>
+    <color name="widget_action_disabled_light">#E4E5EC</color>
+    <color name="widget_action_disabled_dark">#2C2C2E</color>
+    <color name="widget_action_text_disabled_light">#8E9099</color>
+    <color name="widget_action_text_disabled_dark">#8E8E93</color>
 </resources>

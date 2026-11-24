@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">Muestra si el proxy está en ejecución y lo inicia o lo detiene.</string>
+    <string name="widget_status_stopped">Detenido</string>
+    <string name="widget_status_starting">Conectando…</string>
+    <string name="widget_status_stopping">Deteniendo…</string>
+    <string name="widget_status_connected">Conectado</string>
+    <string name="widget_action_start">Iniciar</string>
+    <string name="widget_action_stop">Detener</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">프록시 실행 여부를 표시하고 시작하거나 중지합니다.</string>
+    <string name="widget_status_stopped">실행 중 아님</string>
+    <string name="widget_status_starting">연결 중…</string>
+    <string name="widget_status_stopping">중지 중…</string>
+    <string name="widget_status_connected">연결됨</string>
+    <string name="widget_action_start">시작</string>
+    <string name="widget_action_stop">중지</string>
+</resources>
