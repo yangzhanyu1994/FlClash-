@@ -32,8 +32,8 @@
 - 更新者：Grok Build / cloud implementation
 - 内容：`v0.9.5` 的第三次打包在 `:app:packageRelease` 失败。密钥库能打开，但 PKCS12 的私钥只能用 store password 解密；CI 把另一份 key password 交给 Gradle，得到 `BadPaddingException`。fork 的签名步骤改为用 store password 解密同一张证书，不更换密钥。新签名不能覆盖上游 `chen08209/FlClash`。
 - 测试：attempt 3 的「Require the existing release keystore」只说明四个 secret 非空。同一次 `:app:packageRelease` 读私钥失败，没有 APK，不是签名通过。本地 jarsigner 预检用同一张证书：store password 签名后 `jarsigner -verify` 为 jar verified（exit 0），证书 SHA256 仍是 `0A:CC:20:CC:37:43:82:8A:CD:E1:BF:02:07:8A:69:81:38:B6:45:AA:89:74:C6:67:CB:80:D7:DA:9C:85:13:A9`；key password 读不到私钥。`-strict` 只因自签证书报证书链错误。未真机验证。
-- 发布：`v0.9.6` 的 Package Android 已签出 APK。随后的 GitHub Release 任务在 `flutter pub get` 失败，因为 checkout 没有拉取 `prism_ui`。该任务改为递归拉取子模块。未真机验证。
-- 来源：attempt 3 日志 job `138256656546`；本机用同一密钥库核对 `getKey`（store password 成功，单独的 key password 失败）；Android Gradle `packageRelease`。
+- 发布：run `45341140984` 的 Package Android 已签出 APK。job `138273284408` 在 `flutter pub get` 退出 66，因为 checkout 没有拉取 `prism_ui`，没有重新编译。已用该次 `fork-android-dist` 发布稳定版 [v0.9.6](https://github.com/yangzhanyu1994/FlClash-/releases/tag/v0.9.6)。三份 APK 的包名都是 `com.follow.clash`，`versionName` 为 `0.9.6`。`apksigner` 证书 SHA-256 为 `0acc20cc3743828acde1bf02078a698138b645aa8974c667cb80d7da9c8513a9`。下载校验：arm64 `73f31df7837652fc1bd0b382305510cc1ee92a269ed451c79f4bca52107ae078`，armv7 `9d102dfdce2cda1a876f462e97e767ee262c4950d1e8ceeef222135ee8a23e66`，amd64 `2b751851a50d4a2ee0a714b7795994d8813e9ac49f61ec3348d92e05f1426b86`。未真机验证。
+- 来源：attempt 3 日志 job `138256656546`；发布失败日志 job `138273284408`；本机用同一密钥库核对 `getKey`；对 CI 产物和发布页下载文件运行 `apksigner verify --print-certs` 与 `sha256sum`。
 
 ### 2026-11-24 · Android 桌面小组件（只读）
 
