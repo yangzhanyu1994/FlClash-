@@ -3780,4 +3780,36 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get vpnServiceStartFailed => 'VPN サービスを起動できませんでした。';
+
+  @override
+  String get homeWidgetReadOnly => '読み取り専用';
+
+  @override
+  String get homeWidgetStale => 'データの期限切れ';
+
+  @override
+  String get homeWidgetAbnormal => '状態を取得できません';
+
+  @override
+  String homeWidgetLastNode(Object node) {
+    return '前回：$node';
+  }
+
+  @override
+  String get homeWidgetSessionUpload => '今回のアップロード';
+
+  @override
+  String get homeWidgetSessionDownload => '今回のダウンロード';
+
+  @override
+  String get homeWidgetIpExpired => '期限切れ';
+
+  @override
+  String get homeWidgetIpPartial => '一部の結果';
+
+  @override
+  String get homeWidgetNoProfile => 'プロファイルなし';
+
+  @override
+  String get homeWidgetVpnNeeded => 'VPN 権限が必要';
 }

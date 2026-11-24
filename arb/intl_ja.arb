@@ -1138,5 +1138,15 @@
   "coreRunningDesc": "アプリはコアに接続されています",
   "forceRestartCore": "強制再起動",
   "vpnPermissionNotGranted": "VPN の権限が許可されなかったため、VPN は起動しませんでした。ほかのアプリが常時接続 VPN に設定されている場合も起動できません。",
-  "vpnServiceStartFailed": "VPN サービスを起動できませんでした。"
+  "vpnServiceStartFailed": "VPN サービスを起動できませんでした。",
+  "homeWidgetReadOnly": "読み取り専用",
+  "homeWidgetStale": "データの期限切れ",
+  "homeWidgetAbnormal": "状態を取得できません",
+  "homeWidgetLastNode": "前回：{node}",
+  "homeWidgetSessionUpload": "今回のアップロード",
+  "homeWidgetSessionDownload": "今回のダウンロード",
+  "homeWidgetIpExpired": "期限切れ",
+  "homeWidgetIpPartial": "一部の結果",
+  "homeWidgetNoProfile": "プロファイルなし",
+  "homeWidgetVpnNeeded": "VPN 権限が必要"
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="home_widget_surface">#1C1C1E</color>
+    <color name="home_widget_on_surface">#F2F2F7</color>
+    <color name="home_widget_muted">#C7C7CC</color>
+    <color name="home_widget_ok">#3DDC84</color>
+    <color name="home_widget_warn">#E8A05A</color>
+    <color name="home_widget_error">#FF8A80</color>
+    <color name="home_widget_chip">#3A2E24</color>
+    <color name="home_widget_chip_text">#E8A05A</color>
+</resources>

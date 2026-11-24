@@ -1,6 +1,7 @@
 package com.follow.clash
 
 import com.follow.clash.plugins.AppPlugin
+import com.follow.clash.plugins.HomeWidgetPlugin
 import com.follow.clash.plugins.BatteryPlugin
 import com.follow.clash.plugins.LinkPlugin
 import com.follow.clash.plugins.ServicePlugin
@@ -13,6 +14,7 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         flutterEngine.plugins.add(AppPlugin())
+        flutterEngine.plugins.add(HomeWidgetPlugin())
         flutterEngine.plugins.add(BatteryPlugin())
         flutterEngine.plugins.add(LinkPlugin())
         flutterEngine.plugins.add(ServicePlugin())

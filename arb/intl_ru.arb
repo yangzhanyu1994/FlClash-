@@ -1138,5 +1138,15 @@
   "coreRunningDesc": "Приложение подключено к ядру",
   "forceRestartCore": "Принудительный перезапуск",
   "vpnPermissionNotGranted": "Разрешение на VPN не выдано, поэтому VPN не запущен. Постоянная VPN, заданная для другого приложения, тоже мешает запуску.",
-  "vpnServiceStartFailed": "Не удалось запустить службу VPN."
+  "vpnServiceStartFailed": "Не удалось запустить службу VPN.",
+  "homeWidgetReadOnly": "Только просмотр",
+  "homeWidgetStale": "Данные устарели",
+  "homeWidgetAbnormal": "Состояние недоступно",
+  "homeWidgetLastNode": "Прошлый: {node}",
+  "homeWidgetSessionUpload": "Отдача за сеанс",
+  "homeWidgetSessionDownload": "Загрузка за сеанс",
+  "homeWidgetIpExpired": "Проверка устарела",
+  "homeWidgetIpPartial": "Частичный результат",
+  "homeWidgetNoProfile": "Нет профиля",
+  "homeWidgetVpnNeeded": "Нужно разрешение VPN"
 }

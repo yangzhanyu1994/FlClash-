@@ -25,6 +25,12 @@ class IpQualitiesDao extends DatabaseAccessor<Database>
     return t.checkedAt.isBetweenValues(now.subtract(maxAge), now);
   }
 
+  Future<IpQualityRecord?> findByIp(String ip) {
+    return ipQualities
+        .readable((row) => row, where: (t) => t.ip.equals(ip))
+        .getSingleOrNull();
+  }
+
   Future<IpQualityRecord?> fresh(String ip, Duration maxAge) {
     return ipQualities
         .readable(

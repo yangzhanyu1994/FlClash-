@@ -3855,4 +3855,36 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get vpnServiceStartFailed => 'VPN 서비스를 시작하지 못했습니다.';
+
+  @override
+  String get homeWidgetReadOnly => '읽기 전용';
+
+  @override
+  String get homeWidgetStale => '데이터 만료';
+
+  @override
+  String get homeWidgetAbnormal => '상태를 알 수 없음';
+
+  @override
+  String homeWidgetLastNode(Object node) {
+    return '이전: $node';
+  }
+
+  @override
+  String get homeWidgetSessionUpload => '이번 업로드';
+
+  @override
+  String get homeWidgetSessionDownload => '이번 다운로드';
+
+  @override
+  String get homeWidgetIpExpired => '확인 만료';
+
+  @override
+  String get homeWidgetIpPartial => '일부 결과';
+
+  @override
+  String get homeWidgetNoProfile => '프로필 없음';
+
+  @override
+  String get homeWidgetVpnNeeded => 'VPN 권한 필요';
 }
