@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">显示代理是否在运行，并可启动或停止。</string>
+    <string name="widget_status_stopped">未运行</string>
+    <string name="widget_status_starting">连接中…</string>
+    <string name="widget_status_stopping">正在停止…</string>
+    <string name="widget_status_connected">已连接</string>
+    <string name="widget_action_start">启动</string>
+    <string name="widget_action_stop">暂停</string>
+</resources>

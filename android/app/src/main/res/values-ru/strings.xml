@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">Показывает, запущен ли прокси, и запускает или останавливает его.</string>
+    <string name="widget_status_stopped">Не запущено</string>
+    <string name="widget_status_starting">Подключение…</string>
+    <string name="widget_status_stopping">Остановка…</string>
+    <string name="widget_status_connected">Подключено</string>
+    <string name="widget_action_start">Старт</string>
+    <string name="widget_action_stop">Стоп</string>
+</resources>

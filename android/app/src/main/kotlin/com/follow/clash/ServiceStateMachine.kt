@@ -17,13 +17,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.coroutines.resume
 
-enum class RunState {
-    STARTED,
-    STARTING,
-    STOPPING,
-    STOPPED,
-}
-
 internal typealias RunRequest = RunIntentArbiter.Token
 
 internal const val MISSING_CONFIG_MESSAGE = "No configuration found."

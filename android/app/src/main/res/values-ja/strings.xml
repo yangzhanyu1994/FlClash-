@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_description">プロキシが動作中かを表示し、開始または停止できます。</string>
+    <string name="widget_status_stopped">停止中</string>
+    <string name="widget_status_starting">接続中…</string>
+    <string name="widget_status_stopping">停止しています…</string>
+    <string name="widget_status_connected">接続済み</string>
+    <string name="widget_action_start">開始</string>
+    <string name="widget_action_stop">停止</string>
+</resources>
