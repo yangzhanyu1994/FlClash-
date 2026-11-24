@@ -1138,5 +1138,15 @@
   "coreRunningDesc": "L’application est connectée au cœur",
   "forceRestartCore": "Forcer le redémarrage",
   "vpnPermissionNotGranted": "L'autorisation VPN n'a pas été accordée, le VPN n'a donc pas démarré. Un VPN permanent défini pour une autre application l'empêche aussi.",
-  "vpnServiceStartFailed": "Le service VPN n'a pas pu démarrer."
+  "vpnServiceStartFailed": "Le service VPN n'a pas pu démarrer.",
+  "homeWidgetReadOnly": "Lecture seule",
+  "homeWidgetStale": "Données expirées",
+  "homeWidgetAbnormal": "État indisponible",
+  "homeWidgetLastNode": "Précédent : {node}",
+  "homeWidgetSessionUpload": "Envoi de la session",
+  "homeWidgetSessionDownload": "Réception de la session",
+  "homeWidgetIpExpired": "Contrôle expiré",
+  "homeWidgetIpPartial": "Résultat partiel",
+  "homeWidgetNoProfile": "Aucun profil",
+  "homeWidgetVpnNeeded": "Autorisation VPN requise"
 }

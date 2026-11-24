@@ -3731,4 +3731,36 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get vpnServiceStartFailed => 'VPN 服务无法启动。';
+
+  @override
+  String get homeWidgetReadOnly => '只读状态';
+
+  @override
+  String get homeWidgetStale => '数据已过期';
+
+  @override
+  String get homeWidgetAbnormal => '状态异常';
+
+  @override
+  String homeWidgetLastNode(Object node) {
+    return '上次：$node';
+  }
+
+  @override
+  String get homeWidgetSessionUpload => '本次上传';
+
+  @override
+  String get homeWidgetSessionDownload => '本次下载';
+
+  @override
+  String get homeWidgetIpExpired => '已过期';
+
+  @override
+  String get homeWidgetIpPartial => '部分结果';
+
+  @override
+  String get homeWidgetNoProfile => '无配置';
+
+  @override
+  String get homeWidgetVpnNeeded => '需要 VPN 权限';
 }

@@ -1138,5 +1138,15 @@
   "coreRunningDesc": "La app está conectada al núcleo",
   "forceRestartCore": "Forzar reinicio",
   "vpnPermissionNotGranted": "No se concedió el permiso de VPN, así que la VPN no se inició. Una VPN siempre activa configurada en otra app también lo impide.",
-  "vpnServiceStartFailed": "No se pudo iniciar el servicio VPN."
+  "vpnServiceStartFailed": "No se pudo iniciar el servicio VPN.",
+  "homeWidgetReadOnly": "Solo lectura",
+  "homeWidgetStale": "Datos caducados",
+  "homeWidgetAbnormal": "Estado no disponible",
+  "homeWidgetLastNode": "Anterior: {node}",
+  "homeWidgetSessionUpload": "Subida de la sesión",
+  "homeWidgetSessionDownload": "Bajada de la sesión",
+  "homeWidgetIpExpired": "Comprobación caducada",
+  "homeWidgetIpPartial": "Resultado parcial",
+  "homeWidgetNoProfile": "Sin perfil",
+  "homeWidgetVpnNeeded": "Falta el permiso VPN"
 }

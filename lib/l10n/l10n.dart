@@ -6947,6 +6947,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The VPN service could not start.'**
   String get vpnServiceStartFailed;
+
+  /// No description provided for @homeWidgetReadOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Read only'**
+  String get homeWidgetReadOnly;
+
+  /// No description provided for @homeWidgetStale.
+  ///
+  /// In en, this message translates to:
+  /// **'Data expired'**
+  String get homeWidgetStale;
+
+  /// No description provided for @homeWidgetAbnormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Status unavailable'**
+  String get homeWidgetAbnormal;
+
+  /// No description provided for @homeWidgetLastNode.
+  ///
+  /// In en, this message translates to:
+  /// **'Last: {node}'**
+  String homeWidgetLastNode(Object node);
+
+  /// No description provided for @homeWidgetSessionUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Session upload'**
+  String get homeWidgetSessionUpload;
+
+  /// No description provided for @homeWidgetSessionDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'Session download'**
+  String get homeWidgetSessionDownload;
+
+  /// No description provided for @homeWidgetIpExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Check expired'**
+  String get homeWidgetIpExpired;
+
+  /// No description provided for @homeWidgetIpPartial.
+  ///
+  /// In en, this message translates to:
+  /// **'Partial check'**
+  String get homeWidgetIpPartial;
+
+  /// No description provided for @homeWidgetNoProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'No profile'**
+  String get homeWidgetNoProfile;
+
+  /// No description provided for @homeWidgetVpnNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'VPN permission needed'**
+  String get homeWidgetVpnNeeded;
 }
 
 class _AppLocalizationsDelegate

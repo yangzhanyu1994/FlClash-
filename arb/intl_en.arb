@@ -1253,5 +1253,20 @@
   "coreRunningDesc": "The app is connected to the core",
   "forceRestartCore": "Force restart",
   "vpnPermissionNotGranted": "VPN permission was not granted, so the VPN did not start. An always-on VPN set for another app also blocks it.",
-  "vpnServiceStartFailed": "The VPN service could not start."
+  "vpnServiceStartFailed": "The VPN service could not start.",
+  "homeWidgetReadOnly": "Read only",
+  "homeWidgetStale": "Data expired",
+  "homeWidgetAbnormal": "Status unavailable",
+  "homeWidgetLastNode": "Last: {node}",
+  "@homeWidgetLastNode": {
+    "placeholders": {
+      "node": {}
+    }
+  },
+  "homeWidgetSessionUpload": "Session upload",
+  "homeWidgetSessionDownload": "Session download",
+  "homeWidgetIpExpired": "Check expired",
+  "homeWidgetIpPartial": "Partial check",
+  "homeWidgetNoProfile": "No profile",
+  "homeWidgetVpnNeeded": "VPN permission needed"
 }

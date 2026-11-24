@@ -3954,4 +3954,36 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get vpnServiceStartFailed => 'Не удалось запустить службу VPN.';
+
+  @override
+  String get homeWidgetReadOnly => 'Только просмотр';
+
+  @override
+  String get homeWidgetStale => 'Данные устарели';
+
+  @override
+  String get homeWidgetAbnormal => 'Состояние недоступно';
+
+  @override
+  String homeWidgetLastNode(Object node) {
+    return 'Прошлый: $node';
+  }
+
+  @override
+  String get homeWidgetSessionUpload => 'Отдача за сеанс';
+
+  @override
+  String get homeWidgetSessionDownload => 'Загрузка за сеанс';
+
+  @override
+  String get homeWidgetIpExpired => 'Проверка устарела';
+
+  @override
+  String get homeWidgetIpPartial => 'Частичный результат';
+
+  @override
+  String get homeWidgetNoProfile => 'Нет профиля';
+
+  @override
+  String get homeWidgetVpnNeeded => 'Нужно разрешение VPN';
 }

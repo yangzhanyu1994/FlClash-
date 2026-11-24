@@ -24,6 +24,18 @@
   </picture>
 </p>
 
+## 必读
+
+### 2026-11-24 · Android 桌面小组件（只读）
+
+- 日期：2026-11-24（Asia/Singapore，UTC+8）
+- 更新者：Grok Build / cloud implementation
+- 内容：原生 Android 主屏幕小组件（AppWidget / RemoteViews），不是应用内卡片，也不是快捷设置磁贴。可拉伸。2×2 为运行状态和当前出站节点，4×2 增加模式、速率、IP 类型与等级，4×4 再增加本次会话流量、连接数、当前配置、TUN/系统代理、核心状态、检测时间与来源，4×1 为状态、节点和速率。点击打开应用，没有启动、停止或切换节点。
+- 数据：运行状态来自现有核心状态；速率和本次流量来自 mihomo 的当前速率与自本次启动（停止时 `ResetStatistic`）累计，不是今日流量。IP 类型与等级复用 `IpQuality.level`（住宅/移动网络/商业为优，机房为普通，Tor 或滥用为风险；VPN/代理标记本身不是风险）。不显示公网 IP。
+- 刷新：进程活着时，状态变化立即推送，已放置小组件且服务在运行时大约每 3 秒读一次本机速率。进程退出后不新开前台服务；约 20 秒未再推送则速率改为「—」，约 3 分钟改为「数据已过期」。系统 `updatePeriodMillis` 为 30 分钟，这是 Android 允许的下限。
+- 测试：`flutter analyze --no-fatal-infos` 无问题（exit 0）。`flutter test test/features/home_widget_test.dart` 12 项通过（exit 0），覆盖状态映射、停止后清空速率、出口变化丢弃旧 IP 等级、会话流量文案、尺寸断点、发布去重、以及管理器不发出 START/STOP/TOGGLE。未真机验证。本环境没有 Samsung W25，也没有可用的 Android 模拟器截图。
+- 来源：用户已确认的桌面设计（浅色/深色、信息规格、四种状态）；现有 `IpQuality` / `IpType` / `IpQualityLevel` 与 `lookupIpQuality`；Android App Widgets 文档（RemoteViews、`updatePeriodMillis` 最小 30 分钟、`onAppWidgetOptionsChanged`）。
+
 ## 功能
 
 - **一个应用覆盖 Android、Windows、macOS 和 Linux**，桌面端同时提供 x64 与 ARM64 版本。
@@ -32,7 +44,7 @@
 - **实时查看**连接、请求、DNS 查询和日志。
 - **Material You 设计，融合 Apple 式交互**：支持动态取色、浅色与深色主题，连续曲率圆角，弹出面板可在几档高度间吸附，布局随屏幕从手机到桌面自适应。
 - **备份与恢复**：通过 WebDAV 或本地文件。
-- **平台细节**：Android 上有快捷设置磁贴、分应用代理和 Android TV 支持；桌面端有托盘菜单和全局快捷键。
+- **平台细节**：Android 上有快捷设置磁贴、只读主屏幕小组件、分应用代理和 Android TV 支持；桌面端有托盘菜单和全局快捷键。
 - **开源无广告**，以 GPL-3.0 协议发布。
 
 ## 下载

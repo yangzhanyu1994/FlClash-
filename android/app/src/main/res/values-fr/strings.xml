@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_widget_description">Affiche l’état du proxy. Il ne le démarre ni ne l’arrête.</string>
+    <string name="home_widget_read_only">Lecture seule</string>
+    <string name="home_widget_not_running">Arrêté</string>
+</resources>

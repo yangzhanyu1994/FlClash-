@@ -4007,4 +4007,36 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get vpnServiceStartFailed => 'Le service VPN n\'a pas pu démarrer.';
+
+  @override
+  String get homeWidgetReadOnly => 'Lecture seule';
+
+  @override
+  String get homeWidgetStale => 'Données expirées';
+
+  @override
+  String get homeWidgetAbnormal => 'État indisponible';
+
+  @override
+  String homeWidgetLastNode(Object node) {
+    return 'Précédent : $node';
+  }
+
+  @override
+  String get homeWidgetSessionUpload => 'Envoi de la session';
+
+  @override
+  String get homeWidgetSessionDownload => 'Réception de la session';
+
+  @override
+  String get homeWidgetIpExpired => 'Contrôle expiré';
+
+  @override
+  String get homeWidgetIpPartial => 'Résultat partiel';
+
+  @override
+  String get homeWidgetNoProfile => 'Aucun profil';
+
+  @override
+  String get homeWidgetVpnNeeded => 'Autorisation VPN requise';
 }
